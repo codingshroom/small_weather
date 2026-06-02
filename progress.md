@@ -11,5 +11,6 @@
 
 ### open
 
+ - testing small sqlite database (still failing to solidly use sql-statements to do things)
  - requirement analysis
 
