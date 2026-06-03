@@ -2,8 +2,9 @@
 
 ## to start
  1. python -m venv .venv
- 2. sudo pacman -S python-pip
- 3. pip install -r requirements.txt
+ 2. source .venv/bin/activate
+ 3. sudo pacman -S python-pip ... somehow fails today?!
+ 4. pip install -r requirements.txt
 
 
 ## problems
