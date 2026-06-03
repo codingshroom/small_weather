@@ -1,9 +1,10 @@
 __pycache__/
-venv
-.venv
-
-# sqlite
+.venv/
+*.pyc
+.env
+*.db
 *.sqlite
+
 
 # streamlit
 # https://github.com/streamlit/streamlit/blob/develop/.gitignore
