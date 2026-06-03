@@ -5,25 +5,56 @@ from dotenv import load_dotenv
 import os
 
 
-load_dotenv()
+def get_api_key():
+    load_dotenv()
 
-API_KEY = os.getenv("API_KEY", "")
+    API_KEY = os.getenv("API_KEY", "")
 
-if not API_KEY:
-    raise RuntimeError("API_KEY not set. Check .env")
+    if not API_KEY:
+        raise RuntimeError("API_KEY not set. Check .env")
+    
+    return API_KEY
 
 
-if len(sys.argv) > 0:
-    city = sys.argv[0]
-else:
-    city = "Accra"
+def get_city():
+    if len(sys.argv) > 1:
+        city = sys.argv[1]
+    else:
+        city = "Accra"
+    return city
 
-url = f"http://api.openweathermap.org/geo/1.0/direct"
 
-r = requests.get(url, params={"q":city, "limit":1, "appid": API_KEY})
-data = r.json()
+def get_response(api_key, city):
+    url = "http://api.openweathermap.org/geo/1.0/direct"
+    params = {
+        "q":city, 
+        "limit":1, 
+        "appid":api_key
+    }
 
-lat = data[0]["lat"]
-lon = data[0]["lon"]
+    response = requests.get(url, params=params)
+    return response
 
-print(lat, lon)
+
+def get_lat_lon(response):
+    data = response.json()
+
+    lat = data[0]["lat"]
+    lon = data[0]["lon"]
+
+    return lat, lon
+
+
+def main():
+    api_key = get_api_key()
+    city = get_city()
+    response = get_response(api_key, city)
+    lat, lon = get_lat_lon(response)
+    print(f"{city=}")
+    print(f"{lat=}")
+    print(f"{lon=}")
+
+
+if __name__ == "__main__":
+    main()
+

@@ -1,5 +1,11 @@
 # small_weather
 
+## to start
+ 1. python -m venv .venv
+ 2. sudo pacman -S python-pip
+ 3. pip install -r requirements.txt
+
+
 ## problems
 
 ### 03.06.2026
@@ -11,5 +17,5 @@
     4. pip install openmeteo-requests
     5. pip install requests-cache retry-requests numpy pandas
     6. (deactivate)
-
+ 
 

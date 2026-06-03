@@ -3,7 +3,13 @@ import openmeteo_requests
 import pandas as pd
 import requests_cache
 from retry_requests import retry
-from lalo import lat, lon
+from lalo import get_api_key, get_city, get_response, get_lat_lon
+
+
+api = get_api_key()
+city = get_city()
+response = get_response(api, city)
+lat, lon = get_lat_lon(response)
 
 
 # Setup the Open-Meteo API client with cache and retry on error
