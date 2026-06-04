@@ -8,12 +8,12 @@ import os
 def get_api_key():
     load_dotenv()
 
-    API_KEY = os.getenv("API_KEY", "")
+    api_key = os.getenv("WEATHER_API", "")
 
-    if not API_KEY:
-        raise RuntimeError("API_KEY not set. Check .env")
+    if not api_key:
+        raise RuntimeError("WEATHER_API not set. Check .env")
     
-    return API_KEY
+    return api_key
 
 
 def get_city():
