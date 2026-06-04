@@ -14,9 +14,14 @@
  - now able to call particular city from api_test.py from terminal
  - bash-script for setting venv
 
-### open
- - testing small sqlite database (still failing to solidly use sql-statements to do things)
- - adding temperature to database-schema
- - 
- - requirement analysis
+### 04.06.2026
+ - wrote better user stories
+ - simple sql-statements work now (remove semicolon from statement-strings, use .commit() after INSERT, use .fetchall() after SELECT)
+ - api to the moon --> tinker/moon.py
+ - started building src/database.py --> first two functions
 
+### open
+ - building database-schema (adding temperature & moon)
+ - connecting streamlit to backend (ability to choose city + date)
+ - writing api-data into database
+ - 

@@ -3,7 +3,7 @@
 ## to start
  1. python -m venv .venv
  2. source .venv/bin/activate
- 3. sudo pacman -S python-pip ... somehow fails today?!
+ 3. sudo pacman -S python-pip
  4. pip install -r requirements.txt
 
 
@@ -19,4 +19,8 @@
     5. pip install requests-cache retry-requests numpy pandas
     6. (deactivate)
  
+### 04.06.2026
+ - lost with creating database schema
+ - no real plan in my head on how to move forward
+ - distractions with moon
 

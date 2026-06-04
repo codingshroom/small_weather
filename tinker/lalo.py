@@ -5,13 +5,13 @@ from dotenv import load_dotenv
 import os
 
 
-def get_api_key():
+def get_api_key(key_name):
     load_dotenv()
 
-    api_key = os.getenv("WEATHER_API", "")
+    api_key = os.getenv(key_name, "")
 
     if not api_key:
-        raise RuntimeError("WEATHER_API not set. Check .env")
+        raise RuntimeError(f"{key_name} not set. Check .env")
     
     return api_key
 
@@ -46,7 +46,7 @@ def get_lat_lon(response):
 
 
 def main():
-    api_key = get_api_key()
+    api_key = get_api_key("WEATHER_API")
     city = get_city()
     response = get_response(api_key, city)
     lat, lon = get_lat_lon(response)
