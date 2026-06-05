@@ -17,5 +17,6 @@
 ### 05.06.2026
  - building database and saving data from api into DB because that's what I am afraid the most of
  - drinking some light coffee because very tired
- - 
+ - cleaned up api-calls so I get the data I want for DB
+
 

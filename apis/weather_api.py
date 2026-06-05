@@ -1,13 +1,11 @@
-import openmeteo_requests
 import requests
 
-import pandas as pd
 from lat_lon_api import get_api_key, get_city, get_lat_lon_response, get_lat_lon
 
 
-def get_weather_response_2(date, latitude, longitude):
+def get_weather_response(date, latitude, longitude):
     weather_url = "https://archive-api.open-meteo.com/v1/archive"
-    weather_data = requests.get(
+    response = requests.get(
         weather_url,
         params={
             "latitude": latitude,
@@ -16,25 +14,15 @@ def get_weather_response_2(date, latitude, longitude):
             "end_date": date,
             "hourly": "temperature_2m",
         },
-    ).json()
+    )
+    return response
 
+
+def get_times_temps(response):
+    weather_data = response.json()
     times = weather_data["hourly"]["time"]
     temperatures = weather_data["hourly"]["temperature_2m"]
     return times, temperatures
-
-
-
-def get_weather_response(lat, lon):
-    openmeteo = openmeteo_requests.Client()
-
-    url = "https://api.open-meteo.com/v1/forecast"
-    params = {
-        "latitude": lat,
-        "longitude": lon,
-        "hourly": "temperature_2m",
-    }
-    responses = openmeteo.weather_api(url, params = params)
-    return responses[0]
 
 
 def response_to_json(response):
@@ -49,10 +37,11 @@ def main():
     city = get_city()
     response = get_lat_lon_response(api, city)
     latitude, longitude = get_lat_lon(response)
-    times, temperatures = get_weather_response_2("2026-06-05", latitude, longitude)
+    response = get_weather_response("2026-06-05", latitude, longitude)
+    times, temperatures = get_times_temps(response)
     print("")
-    for time, temperature in zip(times, temperatures):
-        print(time, ": ", temperature)
+    for hour, temp in zip(times, temperatures):
+        print(hour, ": ", temp)
 
 
 if __name__ == "__main__":

@@ -27,3 +27,5 @@
 ### 05.06.2026
  - afraid of touching saving api data into database
  - tiredness
+ - still afraid to touch api --> database
+
