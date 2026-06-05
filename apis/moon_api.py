@@ -1,12 +1,11 @@
 import time
 import json
 import http.client
-from lalo import get_api_key
 
-from dotenv import load_dotenv
+from get_api_key import get_api_key
 
 
-def get_response(api_key, timestamp=int(time.time())):
+def get_moon_response(api_key, timestamp=int(time.time())):
     url = "moon-phase.p.rapidapi.com"
     headers = {
         'x-rapidapi-key': api_key,
@@ -22,7 +21,7 @@ def get_response(api_key, timestamp=int(time.time())):
     return response
 
 
-def get_moon(response):
+def get_moon_data(response):
     string_data = response.read().decode("utf-8")
     json_data = json.loads(string_data)
     moon_data = json_data["moon"]
@@ -32,10 +31,15 @@ def get_moon(response):
     return stage, illumination, emoji
 
 
-def main():
+def moon_api_call():
     api_key = get_api_key("MOON_API")
-    response = get_response(api_key)
-    print(get_moon(response))
+    response = get_moon_response(api_key)
+    stage, illumination, emoji = get_moon_data(response)
+    return stage, illumination, emoji
+
+
+def main():
+    print(moon_api_call())
 
 
 if __name__ == "__main__":

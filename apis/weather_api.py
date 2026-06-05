@@ -1,6 +1,7 @@
 import requests
 
-from lat_lon_api import get_api_key, get_city, get_lat_lon_response, get_lat_lon
+from get_api_key import get_api_key
+from coordinates_api import coordinates_api_call
 
 
 def get_weather_response(date, latitude, longitude):
@@ -18,30 +19,23 @@ def get_weather_response(date, latitude, longitude):
     return response
 
 
-def get_times_temps(response):
+def get_weather_data(response):
     weather_data = response.json()
     times = weather_data["hourly"]["time"]
     temperatures = weather_data["hourly"]["temperature_2m"]
     return times, temperatures
 
 
-def response_to_json(response):
-    string_data = response.read().decode("utf-8")
-    json_data = json.loads(string_data)
-    return json_data
-
+def weather_api_call(city=NULL):
+    api_key = get_api_key("WEATHER_API")
+    latitude, longitude = coordinates_api_call(city)
+    response = get_weather_response("2026-06-05", latitude, longitude)
+    times, temperatures = get_weather_data(response)
+    return zip(times, temperatures)
 
 
 def main():
-    api = get_api_key("WEATHER_API")
-    city = get_city()
-    response = get_lat_lon_response(api, city)
-    latitude, longitude = get_lat_lon(response)
-    response = get_weather_response("2026-06-05", latitude, longitude)
-    times, temperatures = get_times_temps(response)
-    print("")
-    for hour, temp in zip(times, temperatures):
-        print(hour, ": ", temp)
+    weather_data = weather_api_call()
 
 
 if __name__ == "__main__":
