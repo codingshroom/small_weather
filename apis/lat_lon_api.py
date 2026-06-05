@@ -24,7 +24,7 @@ def get_city():
     return city
 
 
-def get_response(api_key, city):
+def get_lat_lon_response(api_key, city):
     url = "http://api.openweathermap.org/geo/1.0/direct"
     params = {
         "q":city, 

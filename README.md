@@ -24,3 +24,6 @@
  - no real plan in my head on how to move forward
  - distractions with moon
 
+### 05.06.2026
+ - afraid of touching saving api data into database
+ - tiredness
