@@ -8,6 +8,7 @@ def insert_into(cursor, connection, table, columns, values):
         INSERT INTO {table} ({columns_as_string})
         VALUES ({qmarks})
         """
+    breakpoint()
     cursor.execute(statement, tuple(values))
     connection.commit()
 

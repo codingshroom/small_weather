@@ -19,6 +19,7 @@
  - simple sql-statements work now (remove semicolon from statement-strings, use .commit() after INSERT, use .fetchall() after SELECT)
  - api to the moon --> tinker/moon.py
  - started building src/database.py --> first two functions
+ - building database-schema (adding temperature & moon)
 
 ### 05.06.2026
  - improved on diagrams
@@ -28,9 +29,9 @@
  - 
 
 ### open
- - building database-schema (adding temperature & moon)
  - connecting streamlit to backend (ability to choose city + date)
  - writing api-data into database
  - simplifying moon-api call with .json()
  - uploading diagrams to repo
-
+ - adding table for emojis: 1 emoji - n moonphases
+ - automatic column-fill in for insert sql-statement (creating dict with tablename: {column1, column2, ...})

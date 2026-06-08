@@ -1,11 +1,10 @@
-import time
 import json
 import http.client
 
-from get_api_key import get_api_key
+from apis.get_api_key import get_api_key
 
 
-def get_moon_response(api_key, timestamp=int(time.time())):
+def get_moon_response(api_key, timestamp):
     url = "moon-phase.p.rapidapi.com"
     headers = {
         'x-rapidapi-key': api_key,
@@ -28,14 +27,14 @@ def get_moon_data(response):
     stage = moon_data["stage"]
     illumination = moon_data["illumination"]
     emoji = moon_data["emoji"]
-    return stage, illumination, emoji
+    return [stage, illumination, emoji]
 
 
-def moon_api_call():
+def moon_api_call(timestamp):
     api_key = get_api_key("MOON_API")
-    response = get_moon_response(api_key)
-    stage, illumination, emoji = get_moon_data(response)
-    return stage, illumination, emoji
+    response = get_moon_response(api_key, timestamp)
+    moon_data_list = get_moon_data(response)
+    return moon_data_list
 
 
 def main():

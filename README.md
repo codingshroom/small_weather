@@ -28,4 +28,5 @@
  - afraid of touching saving api data into database
  - tiredness
  - still afraid to touch api --> database
+ - later in the day modules don't load correctly
 
