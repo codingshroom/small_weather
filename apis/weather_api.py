@@ -36,6 +36,8 @@ def weather_api_call(city=None):
 
 def main():
     weather_data = weather_api_call()
+    for time, temp in weather_data:
+        print(time, temp)
 
 
 if __name__ == "__main__":

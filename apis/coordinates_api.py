@@ -25,11 +25,11 @@ def get_coordinates_response(api_key, city):
     return response
 
 
-def get_coodinates(response):
+def get_coordinates(response):
     data = response.json()
 
-    latitude = data[0]["latitude"]
-    longitude = data[0]["longitude"]
+    latitude = data[0]["lat"]
+    longitude = data[0]["lon"]
 
     return latitude, longitude
 
@@ -38,13 +38,14 @@ def coordinates_api_call(city=None):
     api_key = get_api_key("WEATHER_API")
     city = get_city(city)
     response = get_coordinates_response(api_key, city)
-    latitude, longitude = get_coordinates_data(response)
+    latitude, longitude = get_coordinates(response)
     return latitude, longitude
 
 
 
 def main():
-    print(coordinates_api_call("Berlin"))
+    lat, lon = coordinates_api_call("Berlin")
+    print(lat, lon)
 
 
 if __name__ == "__main__":

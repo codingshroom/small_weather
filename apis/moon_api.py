@@ -1,3 +1,4 @@
+import time
 import json
 import http.client
 
@@ -37,7 +38,8 @@ def moon_api_call(timestamp):
 
 
 def main():
-    print(moon_api_call())
+    current_time = int(time.time())
+    print(moon_api_call(current_time))
 
 
 if __name__ == "__main__":
