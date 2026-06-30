@@ -9,8 +9,16 @@ def check_profile(cursor, connection, profile_name):
     return True
 
 
+def check_moonphase(cursor, connection, stage, illumination):
+    stage_exists = select_from(cursor, connection, "moonphases", columns=["1"], condition=f"stage = '{stage}'") 
+    illumination_exists = select_from(cursor, connection, "moonphases", columns=["1"], condition=f"illumination = '{illumination}'") 
 
-def main():
+    if stage_exists and illumination_exists:
+        return True
+    return False
+
+
+def test_profile():
     date = "2026-05-09"
     city = "Berlin"
     profile = "Kel"
@@ -32,7 +40,34 @@ def main():
     except sqlite3.OperationalError as e:
         print("Failed to open database", e)
 
-    
+
+def test_moonphase():
+    stage = "waxing"
+    illumination = "34"
+
+    try:
+        with sqlite3.connect("data/test.db") as connection:
+            connection.execute("PRAGMA foreign_keys = ON")
+            cursor = connection.cursor()
+
+            moonphase_exists = check_moonphase(cursor, connection, stage, illumination)
+            print(moonphase_exists)
+
+            if not moonphase_exists:
+                insert_into(cursor, connection, "moonphases", ["stage", "illumination"], [stage, illumination])
+
+            rows = select_from(cursor, connection, "moonphases")
+            print(rows)
+
+
+
+    except sqlite3.OperationalError as e:
+        print("Failed to open database", e)
+
+
+
+def main():
+    test_moonphase()
 
 
 if __name__ == "__main__":
