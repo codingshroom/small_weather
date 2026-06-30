@@ -18,9 +18,64 @@ def check_moonphase(cursor, connection, stage, illumination):
     return False
 
 
-def test_profile():
-    date = "2026-05-09"
+def check_city(cursor, connection, city_name):
+    if not select_from(cursor, connection, "cities", columns=["1"], condition=f"cityName = '{city_name}'"):
+        return False
+    return True
+
+
+def check_date(cursor, connection, date):
+    if not select_from(cursor, connection, "dates", columns=["1"], condition=f"date = '{date}'"):
+        return False
+    return True
+
+
+def test_date():
+    date = "2026-06-30"
+    moonID = 18
+
+    try:
+        with sqlite3.connect("data/test.db") as connection:
+            connection.execute("PRAGMA foreign_keys = ON")
+            cursor = connection.cursor()
+
+            date_exists = check_date(cursor, connection, date)
+            print(date_exists)
+
+            if not date_exists:
+                insert_into(cursor, connection, "dates", ["date", "moonID"], [date, moonID])
+
+            rows = select_from(cursor, connection, "dates")
+            print(rows)
+
+    except sqlite3.OperationalError as e:
+        print("Failed to open database", e)
+
+
+def test_city():
     city = "Berlin"
+    lat = 5
+    lon = 666
+
+    try:
+        with sqlite3.connect("data/test.db") as connection:
+            connection.execute("PRAGMA foreign_keys = ON")
+            cursor = connection.cursor()
+
+            city_exists = check_city(cursor, connection, city)
+            print(city_exists)
+
+            if not city_exists:
+                insert_into(cursor, connection, "cities", ["cityName", "latitude", "longitude"], [city, lat, lon])
+
+            rows = select_from(cursor, connection, "cities")
+            print(rows)
+
+    except sqlite3.OperationalError as e:
+        print("Failed to open database", e)
+
+
+def test_profile():
     profile = "Kel"
 
     try:
@@ -59,15 +114,13 @@ def test_moonphase():
             rows = select_from(cursor, connection, "moonphases")
             print(rows)
 
-
-
     except sqlite3.OperationalError as e:
         print("Failed to open database", e)
 
 
 
 def main():
-    test_moonphase()
+    test_date()
 
 
 if __name__ == "__main__":
