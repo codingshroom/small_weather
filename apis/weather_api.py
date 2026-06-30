@@ -1,3 +1,4 @@
+from datetime import date
 import requests
 
 from apis.get_api_key import get_api_key
@@ -26,16 +27,16 @@ def get_weather_data(response):
     return times, temperatures
 
 
-def weather_api_call(city=None):
+def weather_api_call(date="2026-06-05", city=None):
     api_key = get_api_key("WEATHER_API")
     latitude, longitude = coordinates_api_call(city)
-    response = get_weather_response("2026-06-05", latitude, longitude)
+    response = get_weather_response(date, latitude, longitude)
     times, temperatures = get_weather_data(response)
     return zip(times, temperatures)
 
 
 def main():
-    weather_data = weather_api_call()
+    weather_data = weather_api_call(date.today())
     for time, temp in weather_data:
         print(time, temp)
 

@@ -9,6 +9,20 @@
 
 ## problems
 
+### 30.06.2026
+ - no clarity of how to save api_data into database
+
+### 05.06.2026
+ - afraid of touching saving api data into database
+ - tiredness
+ - still afraid to touch api --> database
+ - later in the day modules don't load correctly
+
+### 04.06.2026
+ - lost with creating database schema
+ - no real plan in my head on how to move forward
+ - distractions with moon
+
 ### 03.06.2026
  - venv stuff
  - fix (and found this beautiful pip freeze command --> installing requirements: pip install -r requirements.txt)
@@ -19,14 +33,3 @@
     5. pip install requests-cache retry-requests numpy pandas
     6. (deactivate)
  
-### 04.06.2026
- - lost with creating database schema
- - no real plan in my head on how to move forward
- - distractions with moon
-
-### 05.06.2026
- - afraid of touching saving api data into database
- - tiredness
- - still afraid to touch api --> database
- - later in the day modules don't load correctly
-
