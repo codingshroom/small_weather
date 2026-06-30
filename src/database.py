@@ -24,7 +24,7 @@ def select_from(cursor, connection, table, columns=["*"], condition=1):
     return rows
 
 
-def test():
+def main():
     try:
         with sqlite3.connect("data/test.db") as connection:
             connection.execute("PRAGMA foreign_keys = ON")
@@ -43,5 +43,5 @@ def test():
 
 
 if __name__ == "__main__":
-    test()
+    main()
 

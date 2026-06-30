@@ -38,17 +38,21 @@ STATEMENTS = {
     "dates": """
         CREATE TABLE IF NOT EXISTS dates (
             date TEXT PRIMARY KEY,
-            weatherID INTEGER NOT NULL,
             moonID INTEGER NOT NULL,
-            FOREIGN KEY(weatherID) REFERENCES weatherdata(weatherID),
             FOREIGN KEY(moonID) REFERENCES moonphases(moonID)
         )
     """,
    "weatherdata": """
         CREATE TABLE IF NOT EXISTS weatherdata (
-            weatherID INTEGER PRIMARY KEY,
+            cityID INTEGER
+            date TEXT
+            hour INTEGER
             temperature REAL NOT NULL,
-            rain REAL NOT NULL
+            rainProbability REAL NOT NULL,
+            rainAmount REAL NOT NULL
+            PRIMARY KEY(cityID, date, hour)
+            FOREIGN KEY(cityID) REFERENCES cities(cityID)
+            FOREIGN KEY(date) REFERENCES dates(date)
         )
     """,
 }
