@@ -44,14 +44,14 @@ STATEMENTS = {
     """,
    "weatherdata": """
         CREATE TABLE IF NOT EXISTS weatherdata (
-            cityID INTEGER
-            date TEXT
-            hour INTEGER
+            cityID INTEGER NOT NULL,
+            date TEXT NOT NULL,
+            hour INTEGER NOT NULL,
             temperature REAL NOT NULL,
             rainProbability REAL NOT NULL,
-            rainAmount REAL NOT NULL
-            PRIMARY KEY(cityID, date, hour)
-            FOREIGN KEY(cityID) REFERENCES cities(cityID)
+            rainAmount REAL NOT NULL,
+            PRIMARY KEY(cityID, date, hour),
+            FOREIGN KEY(cityID) REFERENCES cities(cityID),
             FOREIGN KEY(date) REFERENCES dates(date)
         )
     """,

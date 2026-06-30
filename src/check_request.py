@@ -1,12 +1,12 @@
 import sqlite3
 
-from data.database import select_from, insert_into
+from src.database import select_from, insert_into
 
 
 def check_profile(cursor, connection, profile_name):
-    if not select_from(cursor, connection, "profiles", ["1"], f"profileName={profile_name}"):
-        return false
-    return true
+    if not select_from(cursor, connection, "profiles", columns=["1"], condition=f"profileName = '{profile_name}'"):
+        return False
+    return True
 
 
 
@@ -21,6 +21,7 @@ def main():
             cursor = connection.cursor()
 
             profile_exists = check_profile(cursor, connection, profile)
+            print(profile_exists)
 
             if not profile_exists:
                 insert_into(cursor, connection, "profiles", ["profileName"], [profile])
