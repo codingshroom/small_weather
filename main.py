@@ -20,8 +20,7 @@ def main():
             rows = select_from(cursor, connection, "moonphases")
             print(rows)
 
-            insert_into(cursor, connection, "moonphases", ["moonID", "stage", "illumination"], moon_data)
-            print(emoji)
+            insert_into(cursor, connection, "moonphases", ["stage", "illumination"], moon_data)
 
             rows = select_from(cursor, connection, "moonphases")
             print(rows)

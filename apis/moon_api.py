@@ -26,8 +26,7 @@ def get_moon_data(response):
     moon_data = json_data["moon"]
     stage = moon_data["stage"]
     illumination = moon_data["illumination"]
-    emoji = moon_data["emoji"]
-    return [stage, illumination, emoji]
+    return [stage, illumination]
 
 
 def moon_api_call(timestamp):

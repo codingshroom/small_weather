@@ -8,7 +8,6 @@ def insert_into(cursor, connection, table, columns, values):
         INSERT INTO {table} ({columns_as_string})
         VALUES ({qmarks})
         """
-    breakpoint()
     cursor.execute(statement, tuple(values))
     connection.commit()
 
@@ -34,7 +33,7 @@ def test():
             rows = select_from(cursor, connection, "moonphases")
             print(rows)
 
-            insert_into(cursor, connection, "moonphases", ["moonID", "stage", "illumination"], [2, "waxing", 54])
+            insert_into(cursor, connection, "moonphases", ["stage", "illumination"], ("waxing", 54))
 
             rows = select_from(cursor, connection, "moonphases")
             print(rows)

@@ -56,13 +56,15 @@ STATEMENTS = {
 
 def main():
     try:
-        with sqlite3.connect("data/database.db") as connection:
+        with sqlite3.connect("data/test.db") as connection:
             connection.execute("PRAGMA foreign_keys = ON")
             cursor = connection.cursor()
             print("Created/Opened SQLite database successfully.")
             for table in TABLES:
+                print(table)
                 statement = STATEMENTS[table]
                 cursor.execute(statement)
+                connection.commit()
     except sqlite3.OperationalError as e:
         print("Failed to open database", e)
 
