@@ -30,9 +30,70 @@ def check_date(cursor, connection, date):
     return True
 
 
+def check_request(cursor, connection, profileID, cityID, date):
+    if not select_from(cursor, connection, "requests", columns=["1"], condition=f"profileID = '{profileID}' AND cityID = '{cityID}' AND date = '{date}'"):
+        return False
+    return True
+
+
+def check_weatherdata(cursor, connection, cityID, date, hour):
+    if not select_from(cursor, connection, "weatherdata", columns=["1"], condition=f"cityID = '{cityID}' AND date = '{date}' AND hour = '{hour}'"):
+        return False
+    return True
+
+
+def test_weatherdata():
+    cityID = 1
+    date = "2026-07-01"
+    hour = 5
+    temp = 15
+    rainProb = 42
+    rainAmount = 0.5
+
+    try:
+        with sqlite3.connect("data/test.db") as connection:
+            connection.execute("PRAGMA foreign_keys = ON")
+            cursor = connection.cursor()
+
+            weatherdata_exists = check_weatherdata(cursor, connection, cityID, date, hour)
+            print(weatherdata_exists)
+
+            if not weatherdata_exists:
+                insert_into(cursor, connection, "weatherdata", ["cityID", "date", "hour", "temperature", "rainProbability", "rainAmount"], [cityID, date, hour, temp, rainProb, rainAmount])
+
+            rows = select_from(cursor, connection, "weatherdata")
+            print(rows)
+
+    except sqlite3.OperationalError as e:
+        print("Failed to open database", e)
+
+
+def test_request():
+    date = "2026-07-01"
+    profileID = 1
+    cityID = 1
+
+    try:
+        with sqlite3.connect("data/test.db") as connection:
+            connection.execute("PRAGMA foreign_keys = ON")
+            cursor = connection.cursor()
+
+            request_exists = check_request(cursor, connection, profileID, cityID, date)
+            print(request_exists)
+
+            if not request_exists:
+                insert_into(cursor, connection, "requests", ["profileID", "cityID", "date"], [profileID, cityID, date])
+
+            rows = select_from(cursor, connection, "requests")
+            print(rows)
+
+    except sqlite3.OperationalError as e:
+        print("Failed to open database", e)
+
+
 def test_date():
-    date = "2026-06-30"
-    moonID = 18
+    date = "2026-07-01"
+    moonID = 1
 
     try:
         with sqlite3.connect("data/test.db") as connection:
@@ -53,9 +114,9 @@ def test_date():
 
 
 def test_city():
-    city = "Berlin"
-    lat = 5
-    lon = 666
+    city = "Tokyo"
+    lat = 3
+    lon = 21
 
     try:
         with sqlite3.connect("data/test.db") as connection:
@@ -120,7 +181,7 @@ def test_moonphase():
 
 
 def main():
-    test_date()
+    test_weatherdata()
 
 
 if __name__ == "__main__":

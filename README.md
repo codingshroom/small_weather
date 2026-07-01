@@ -9,8 +9,12 @@
 
 ## problems
 
+### 01.07.2026
+ - module not found error --> fix from root of project: export PYTHONPATH=`pwd`
+ - check_request a mess --> functions need refactoring --> chance to make it more DRY
+
 ### 30.06.2026
- - no clarity of how to save api_data into database
+ - no clarity on how to save api_data into database
 
 ### 05.06.2026
  - afraid of touching saving api data into database
