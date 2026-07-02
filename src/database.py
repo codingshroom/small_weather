@@ -24,6 +24,20 @@ def select_from(cursor, connection, table, columns=["*"], condition=1):
     return rows
 
 
+def ljoin_select(cursor, connection, table, join_table, key, columns=["*"], condition=1):
+    columns_as_string = ", ".join(c for c in columns)
+    statement = f"""
+        SELECT {columns_as_string}
+        FROM {table}
+        LEFT JOIN {join_table}
+            ON {key}
+        WHERE {condition}
+    """
+    cursor.execute(statement)
+    rows = cursor.fetchall()
+    return rows
+
+
 def main():
     try:
         with sqlite3.connect("data/test.db") as connection:
