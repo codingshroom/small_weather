@@ -1,5 +1,8 @@
 # decisions
 
+### 02.07.2026
+ - starting src/check_request.py new --> got a structure --> following through on that
+
 ### 01.07.2026
  - buidling src/check_request.py because need to check DB before making api-calls
 

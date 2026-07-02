@@ -4,6 +4,7 @@ __pycache__/
 .env
 *.db
 *.sqlite
+src/old_check_request.py
 
 
 # streamlit
