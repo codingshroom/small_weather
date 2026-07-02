@@ -27,7 +27,7 @@ def get_moon_data(response):
     moon_data = json_data["moon"]
     stage = moon_data["stage"]
     illumination = moon_data["illumination"]
-    return [stage, illumination]
+    return stage, illumination
 
 
 def moon_api_call(request_date=None):
@@ -35,12 +35,11 @@ def moon_api_call(request_date=None):
         request_date = date.today()
     else:
         request_date = datetime.strptime("2026-07-01", "%Y-%m-%d")
-    breakpoint()
     timestamp = int(request_date.timestamp())
     api_key = get_api_key("MOON_API")
     response = get_moon_response(api_key, timestamp)
-    moon_data_list = get_moon_data(response)
-    return moon_data_list
+    stage, illumination = get_moon_data(response)
+    return stage, illumination
 
 
 def main():

@@ -11,7 +11,7 @@
 
 ### 02.07.2026
  - feeling behind
- - 
+ - completely lost control over src/check_request.py
 
 ### 01.07.2026
  - module not found error --> fix from root of project: export PYTHONPATH=`pwd`

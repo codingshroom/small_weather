@@ -22,23 +22,23 @@ def get_weather_response(date, latitude, longitude):
 
 def get_weather_data(response):
     weather_data = response.json()
-    times = weather_data["hourly"]["time"]
     temperatures = weather_data["hourly"]["temperature_2m"]
-    return times, temperatures
+    return temperatures
 
 
-def weather_api_call(date="2026-06-05", city=None):
+def weather_api_call(latitude, longitude, date="2026-06-05"):
     api_key = get_api_key("WEATHER_API")
-    latitude, longitude = coordinates_api_call(city)
     response = get_weather_response(date, latitude, longitude)
-    times, temperatures = get_weather_data(response)
-    return zip(times, temperatures)
+    temperatures = get_weather_data(response)
+    return temperatures
 
 
 def main():
-    weather_data = weather_api_call(date.today())
-    for time, temp in weather_data:
-        print(time, temp)
+    lat = 5
+    lon = 3
+    weather_data = weather_api_call(lat, lon, date.today())
+    for i in range(len(weather_data)):
+        print(f"hour: {i}  temp: {weather_data[i]}")
 
 
 if __name__ == "__main__":
