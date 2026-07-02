@@ -1,9 +1,14 @@
 # progress
 
 ### open
+ - if request asks for new data: need to prepare api-call data to insert into DB
+ - checking database entries before making api-calls
+ - cleaning up code structure in src/check_request.py
  - connecting streamlit to backend (ability to choose city + date)
  - simplifying moon-api call with .json()
- - checking database entries before making api-calls
+
+### 01.07.2026
+ - refactored src/check_request.py
 
 ### 30.06.2026
  - uploaded diagrams to repo

@@ -1,5 +1,8 @@
 # decisions
 
+### 01.07.2026
+ - buidling src/check_request.py because need to check DB before making api-calls
+
 ### 05.06.2026
  - building database and saving data from api into DB because that's what I am afraid the most of
  - drinking some light coffee because very tired

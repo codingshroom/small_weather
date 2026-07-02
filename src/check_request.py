@@ -2,6 +2,8 @@ import sqlite3
 
 from src.database import select_from, insert_into
 from apis.coordinates_api import coordinates_api_call
+from apis.moon_api import moon_api_call
+from apis.weather_api import weather_api_call
 
 
 '''
@@ -22,8 +24,29 @@ def data_exists(cursor, connection, table, **data):
     return bool(exists)
 
 
-def prep_city(city):
-    lat, lon = coordinates_api_call(city)
+def prep_city(cityname):
+    lat, lon = coordinates_api_call(cityname)
+    return [lat, lon]
+
+
+def prep_moon(timestamp):
+    return moon_api_call(timestamp)
+
+
+def prep_weather(date, city):
+    return weather_api_call(date, city)
+
+
+def api_selector(table, *args):
+    match table:
+        case "cities":
+            return prep_city(*args)
+        case "moonphases":
+            return prep_moon()
+        case "weatherdata":
+            return prep_weather()
+        case _:
+            return None
 
 
 def request_data(table, **data):
@@ -35,6 +58,7 @@ def request_data(table, **data):
             exists = data_exists(cursor, connection, table, **data)
 
             if not exists:
+                api_call = api_selector(table)
                 columns = [key for key, _ in data.items()]
                 values = [value for _, value in data.items()]
                 insert_into(cursor, connection, table, columns, values)
@@ -44,6 +68,7 @@ def request_data(table, **data):
 
     except sqlite3.OperationalError as e:
         print("Failed to open database", e)
+
 
 
 def main():
