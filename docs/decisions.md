@@ -2,6 +2,7 @@
 
 ### 02.07.2026
  - starting src/check_request.py new --> got a structure --> following through on that
+ - starting on apis/moon_api.py --> needs to handle date to timestamp for api call
 
 ### 01.07.2026
  - buidling src/check_request.py because need to check DB before making api-calls

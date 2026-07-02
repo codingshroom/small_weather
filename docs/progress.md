@@ -10,6 +10,7 @@
 
 ### 02.07.2026
  - realising how difficult it is to make progress when there is no real plan #src/check_request.py
+ - fixed the side of the moon that takes in a date and continues with a timestamp
 
 ### 01.07.2026
  - refactored src/check_request.py

@@ -1,7 +1,7 @@
 import json
 import http.client
 
-from datetime import date
+from datetime import date, datetime
 from apis.get_api_key import get_api_key
 
 
@@ -30,12 +30,17 @@ def get_moon_data(response):
     return stage, illumination
 
 
-def moon_api_call(request_date=None):
+def get_timestamp(request_date):
     if not request_date:
-        request_date = date.today()
+        request_date = datetime.combine(date.today(), datetime.min.time())
     else:
-        request_date = datetime.strptime("2026-07-01", "%Y-%m-%d")
+        request_date = datetime.strptime(request_date, "%Y-%m-%d")
     timestamp = int(request_date.timestamp())
+    return timestamp
+
+
+def moon_api_call(request_date=None):
+    timestamp = get_timestamp(request_date)
     api_key = get_api_key("MOON_API")
     response = get_moon_response(api_key, timestamp)
     stage, illumination = get_moon_data(response)
@@ -43,7 +48,7 @@ def moon_api_call(request_date=None):
 
 
 def main():
-    print(moon_api_call())
+    print("current moonphase: ", moon_api_call())
 
 
 if __name__ == "__main__":
